@@ -1,0 +1,11 @@
+.idea/
+venv
+env
+media/
+.env
+database
+__pycache__/
+*/__pycache__/
+*.py[cod]
+.pyc
+*.pyc

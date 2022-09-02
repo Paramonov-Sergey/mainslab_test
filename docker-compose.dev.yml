@@ -1,0 +1,48 @@
+version: "3.9"
+services:
+  web:
+    container_name: account_app
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8090:8000"
+
+    volumes:
+      - .:/account
+#    links:
+#      - main_db
+    depends_on:
+      - main_db
+    env_file:
+      - ./.env
+
+
+  main_db:
+    container_name: main_db
+    image: postgres
+    restart: always
+    volumes:
+      - ./database:/var/lib/postgresql
+    environment:
+      POSTGRES_USER: ${USER_NAME}
+      POSTGRES_PASSWORD: ${USER_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    env_file:
+      - ./.env
+#    ports:
+#      - "5440:5432"
+
+  pg_admin_interface:
+    container_name: pg_admin_interface
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: 1111
+    ports:
+      - "5015:80"
+
+
+
