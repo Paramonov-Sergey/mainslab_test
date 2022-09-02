@@ -2,7 +2,7 @@
 venv
 env
 media/
-.env
+#.env
 database
 __pycache__/
 */__pycache__/
